@@ -9,5 +9,4 @@ import javax.inject.Inject
 @HiltViewModel
 class NetworkViewModel @Inject constructor(private val networkRepository: NetworkRepository) :
     ViewModel() {
-        private val stateFlow=MutableStateFlow<>
 }
