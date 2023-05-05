@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="statistics"
+            android:icon="@drawable/stat"
+            android:title="Statistics" />
+        <item
+            android:id="@+id/symptoms"
+            android:icon="@drawable/simp"
+            android:title="Symptoms" />
+        <item
+            android:id="@+id/preventation"
+            android:icon="@drawable/prev"
+            android:title="Preventation" />
+        <item
+            android:id="@+id/article"
+            android:icon="@drawable/article"
+            android:title="Article" />
+        <item
+            android:id="@+id/news"
+            android:icon="@drawable/simp"
+            android:title="News" />
+        <item
+            android:id="@+id/help"
+            android:icon="@drawable/help"
+            android:title="Help" />
+    </group>
+</menu>
