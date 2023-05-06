@@ -1,55 +1,52 @@
 package uz.abdurashidov.covid19.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import uz.abdurashidov.covid19.R
+import uz.abdurashidov.covid19.databinding.FragmentStatisticBinding
+import uz.abdurashidov.covid19.utils.Status
+import uz.abdurashidov.covid19.viewmodel.NetworkViewModel
+import kotlin.coroutines.CoroutineContext
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StatisticFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class StatisticFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+@AndroidEntryPoint
+class StatisticFragment : Fragment(), CoroutineScope {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(uz.abdurashidov.covid19.ui.adapter.ARG_PARAM1)
-            param2 = it.getString(uz.abdurashidov.covid19.ui.adapter.ARG_PARAM2)
-        }
-    }
-
+    private val binding by lazy { FragmentStatisticBinding.inflate(layoutInflater) }
+    private val networkViewModel : NetworkViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistic, container, false)
-    }
+    ): View {
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StatisticFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StatisticFragment().apply {
-                arguments = Bundle().apply {
-                    putString(uz.abdurashidov.covid19.ui.adapter.ARG_PARAM1, param1)
-                    putString(uz.abdurashidov.covid19.ui.adapter.ARG_PARAM2, param2)
+        launch {
+            networkViewModel.getData().collectLatest {
+                when(it.status){
+                    Status.SUCCESS->{
+                        Log.d("@statisticsFragment", "onCreateView: ${it.data?.rawData}")
+                    }
+                    Status.ERROR->{
+                        Log.d("@statisticsFragment", "onCreateView: ${it.message}")
+                    }
+                    Status.LOADING->{
+                        Log.d("@statisticsFragment", "onCreateView: ${it.message}")
+                    }
                 }
             }
+        }
+
+        return binding.root
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = Job()
 }

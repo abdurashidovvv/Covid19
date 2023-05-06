@@ -7,7 +7,7 @@
             android:icon="@drawable/home"
             android:title="Home" />
         <item
-            android:id="statistics"
+            android:id="@+id/statistics"
             android:icon="@drawable/stat"
             android:title="Statistics" />
         <item
