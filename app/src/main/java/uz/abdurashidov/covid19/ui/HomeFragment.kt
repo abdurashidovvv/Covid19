@@ -1,5 +1,6 @@
 package uz.abdurashidov.covid19.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,13 +13,16 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import uz.abdurashidov.covid19.R
 import uz.abdurashidov.covid19.databinding.FragmentHomeBinding
 import uz.abdurashidov.covid19.models.PrevModel
+import uz.abdurashidov.covid19.models.covidnewsmodel.Article
 import uz.abdurashidov.covid19.network.NewsViewModel
+import uz.abdurashidov.covid19.ui.adapter.ArticleAdapter
 import uz.abdurashidov.covid19.ui.adapter.PreventationAdapter
 import uz.abdurashidov.covid19.utils.Status
 import uz.abdurashidov.covid19.viewmodel.NetworkViewModel
@@ -28,23 +32,26 @@ import kotlin.coroutines.CoroutineContext
 class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItemSelectedListener {
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private lateinit var list: ArrayList<PrevModel>
+    private lateinit var articleAdapter: ArticleAdapter
     private lateinit var preventationAdapter: PreventationAdapter
+    private lateinit var articleList: ArrayList<Article>
     private val networkViewModel: NetworkViewModel by viewModels()
-    private val newsViewModel:NewsViewModel by viewModels()
+    private val newsViewModel: NewsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         list = ArrayList()
+        articleList = ArrayList()
         loadData()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        preventationAdapter = PreventationAdapter(list)
-        binding.preventionRv.adapter = preventationAdapter
 
-        launch {
+
+        launch(Dispatchers.Main) {
             networkViewModel.getData().collectLatest {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -62,10 +69,17 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
             }
         }
 
-        launch {
+        //News
+        launch(Dispatchers.Main) {
             newsViewModel.getData().collectLatest {
                 when (it.status) {
                     Status.SUCCESS -> {
+                        if (it.data!=null){
+                            val list=ArrayList<Article>()
+                            list.addAll(it.data.articles)
+                            articleAdapter.list=list
+                            articleAdapter.notifyDataSetChanged()
+                        }
                         Log.d("@homeFragment", "onCreateView: ${it.data?.articles}")
                     }
 
@@ -86,6 +100,17 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        preventationAdapter = PreventationAdapter(list)
+        binding.preventionRv.adapter = preventationAdapter
+
+        articleAdapter = ArticleAdapter(articleList)
+        binding.newsRv.adapter = articleAdapter
+
     }
 
     override val coroutineContext: CoroutineContext
