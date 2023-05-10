@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import uz.abdurashidov.covid19.models.covidmodels.ResponseCovidData
 import uz.abdurashidov.covid19.models.covidnewsmodel.NewsResponse
 import uz.abdurashidov.covid19.repository.NetworkRepository
 import uz.abdurashidov.covid19.utils.Resource

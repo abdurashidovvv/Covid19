@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.abdurashidov.covid19.news.network.NewsNetwork
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -15,11 +16,13 @@ class NewsNetworkModule {
 
     @Provides
     @Singleton
+    @Named("newsBaseUrl")
     fun provideBaseUrl(): String = "https://newsapi.org/v2/"
 
     @Provides
     @Singleton
-    fun provideRetrofit(baseUrl:String): Retrofit {
+    @Named("newsRetrofit")
+    fun provideRetrofit(@Named("newsBaseUrl") baseUrl:String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -28,5 +31,6 @@ class NewsNetworkModule {
 
     @Provides
     @Singleton
-    fun provideNewsApiService(retrofit: Retrofit):NewsNetwork=retrofit.create(NewsNetwork::class.java)
+    @Named("newsApi")
+    fun provideNewsApiService(@Named("newsRetrofit") retrofit: Retrofit):NewsNetwork=retrofit.create(NewsNetwork::class.java)
 }

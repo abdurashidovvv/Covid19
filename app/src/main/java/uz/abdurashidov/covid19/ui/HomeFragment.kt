@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import uz.abdurashidov.covid19.R
 import uz.abdurashidov.covid19.databinding.FragmentHomeBinding
 import uz.abdurashidov.covid19.models.PrevModel
+import uz.abdurashidov.covid19.network.NewsViewModel
 import uz.abdurashidov.covid19.ui.adapter.PreventationAdapter
 import uz.abdurashidov.covid19.utils.Status
 import uz.abdurashidov.covid19.viewmodel.NetworkViewModel
@@ -29,7 +30,7 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
     private lateinit var list: ArrayList<PrevModel>
     private lateinit var preventationAdapter: PreventationAdapter
     private val networkViewModel: NetworkViewModel by viewModels()
-
+    private val newsViewModel:NewsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         list = ArrayList()
@@ -60,6 +61,25 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
                 }
             }
         }
+
+        launch {
+            newsViewModel.getData().collectLatest {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        Log.d("@homeFragment", "onCreateView: ${it.data?.articles}")
+                    }
+
+                    Status.ERROR -> {
+                        Log.d("@homeFragment", "onCreateView: ${it.message}")
+                    }
+
+                    Status.LOADING -> {
+                        Log.d("@homeFragment", "onCreateView: ${it.message}")
+                    }
+                }
+            }
+        }
+
         binding.navView.setNavigationItemSelectedListener(this)
         binding.menu.setOnClickListener {
             binding.drawer.open()
