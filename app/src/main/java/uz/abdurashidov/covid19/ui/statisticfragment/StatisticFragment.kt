@@ -1,4 +1,4 @@
-package uz.abdurashidov.covid19.ui
+package uz.abdurashidov.covid19.ui.statisticfragment
 
 import android.os.Bundle
 import android.util.Log

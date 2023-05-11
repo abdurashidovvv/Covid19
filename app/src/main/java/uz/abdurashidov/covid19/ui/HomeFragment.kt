@@ -111,6 +111,8 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
         articleAdapter = ArticleAdapter(articleList)
         binding.newsRv.adapter = articleAdapter
 
+        binding.articleRv.adapter=articleAdapter
+
     }
 
     override val coroutineContext: CoroutineContext
