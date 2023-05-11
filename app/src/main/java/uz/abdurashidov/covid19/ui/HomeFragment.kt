@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -74,10 +75,10 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
             newsViewModel.getData().collectLatest {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        if (it.data!=null){
-                            val list=ArrayList<Article>()
+                        if (it.data != null) {
+                            val list = ArrayList<Article>()
                             list.addAll(it.data.articles)
-                            articleAdapter.list=list
+                            articleAdapter.list = list
                             articleAdapter.notifyDataSetChanged()
                         }
                         Log.d("@homeFragment", "onCreateView: ${it.data?.articles}")
@@ -111,9 +112,10 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
         articleAdapter = ArticleAdapter(articleList)
         binding.newsRv.adapter = articleAdapter
 
-        binding.articleRv.adapter=articleAdapter
+        binding.articleRv.adapter = articleAdapter
 
     }
+
 
     override val coroutineContext: CoroutineContext
         get() = Job()
@@ -121,15 +123,15 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home -> {
-                Toast.makeText(context, "Home !", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.homeFragment)
             }
 
             R.id.statistics -> {
-                Toast.makeText(context, "Statistics !", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.statisticFragment)
             }
 
             R.id.symptoms -> {
-                Toast.makeText(context, "Symptoms !", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.symptomFragment)
             }
 
             R.id.preventation -> {
@@ -137,15 +139,15 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
             }
 
             R.id.article -> {
-                Toast.makeText(context, "Article !", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.articleFragment)
             }
 
             R.id.news -> {
-                Toast.makeText(context, "News !", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.newsFragment)
             }
 
             R.id.help -> {
-                Toast.makeText(context, "Help !", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.helpFragment)
             }
         }
         return true

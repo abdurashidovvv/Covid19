@@ -44,9 +44,26 @@ class StatisticFragment : Fragment(), CoroutineScope {
             }
         }
 
+        binding.global.setOnClickListener {
+            val fragment=GlobalStatFragment()
+            replaceFragment(fragment)
+        }
+        binding.uzb.setOnClickListener {
+            val fragment=UzbStatFragment()
+            replaceFragment(fragment)
+        }
+
         return binding.root
     }
 
     override val coroutineContext: CoroutineContext
         get() = Job()
+
+
+    private fun replaceFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, fragment)
+            .commit()
+    }
+
 }

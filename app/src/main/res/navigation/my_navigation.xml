@@ -15,4 +15,29 @@
         android:name="uz.abdurashidov.covid19.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="uz.abdurashidov.covid19.ui.statisticfragment.StatisticFragment"
+        android:label="fragment_statistic"
+        tools:layout="@layout/fragment_statistic" />
+    <fragment
+        android:id="@+id/symptomFragment"
+        android:name="uz.abdurashidov.covid19.ui.SymptomFragment"
+        android:label="fragment_symptom"
+        tools:layout="@layout/fragment_symptom" />
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="uz.abdurashidov.covid19.ui.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="uz.abdurashidov.covid19.ui.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="uz.abdurashidov.covid19.ui.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
 </navigation>
