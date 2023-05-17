@@ -43,8 +43,8 @@ class UzbStatFragment : Fragment(), CoroutineScope {
                     it.data.rawData.forEach { country ->
                         if (country.Country_Region == "Uzbekistan") {
                             Log.d("@uzbStatFragment", "onCreateView: $country")
-                            val s1 = Segment("${country.Deaths}", country.Confirmed.toInt())
-                            val s3 = Segment("${country.Confirmed}", country.Deaths.toInt())
+                            val s1 = Segment("${country.Confirmed}", country.Confirmed.toInt())
+                            val s3 = Segment("${country.Deaths}", country.Deaths.toInt())
 
                             val sf1 = SegmentFormatter(Color.BLUE)
                             val sf3 = SegmentFormatter(Color.CYAN)
