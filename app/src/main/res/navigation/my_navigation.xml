@@ -3,41 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="uz.abdurashidov.covid19.ui.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="uz.abdurashidov.covid19.ui.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/statisticFragment"
-        android:name="uz.abdurashidov.covid19.ui.statisticfragment.StatisticFragment"
-        android:label="fragment_statistic"
-        tools:layout="@layout/fragment_statistic" />
-    <fragment
-        android:id="@+id/symptomFragment"
-        android:name="uz.abdurashidov.covid19.ui.SymptomFragment"
-        android:label="fragment_symptom"
-        tools:layout="@layout/fragment_symptom" />
-    <fragment
-        android:id="@+id/articleFragment"
-        android:name="uz.abdurashidov.covid19.ui.ArticleFragment"
-        android:label="fragment_article"
-        tools:layout="@layout/fragment_article" />
-    <fragment
-        android:id="@+id/newsFragment"
-        android:name="uz.abdurashidov.covid19.ui.NewsFragment"
-        android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
-    <fragment
-        android:id="@+id/helpFragment"
-        android:name="uz.abdurashidov.covid19.ui.HelpFragment"
-        android:label="fragment_help"
-        tools:layout="@layout/fragment_help" />
+        android:id="@+id/mainFragment"
+        android:name="uz.abdurashidov.covid19.ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+
 </navigation>

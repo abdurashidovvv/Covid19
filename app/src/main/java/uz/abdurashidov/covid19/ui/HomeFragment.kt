@@ -30,7 +30,7 @@ import uz.abdurashidov.covid19.viewmodel.NetworkViewModel
 import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItemSelectedListener {
+class HomeFragment : Fragment(), CoroutineScope {
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private lateinit var list: ArrayList<PrevModel>
     private lateinit var articleAdapter: ArticleAdapter
@@ -95,7 +95,6 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
             }
         }
 
-        binding.navView.setNavigationItemSelectedListener(this)
         binding.menu.setOnClickListener {
             binding.drawer.open()
         }
@@ -120,38 +119,6 @@ class HomeFragment : Fragment(), CoroutineScope, NavigationView.OnNavigationItem
     override val coroutineContext: CoroutineContext
         get() = Job()
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home -> {
-                findNavController().navigate(R.id.homeFragment)
-            }
-
-            R.id.statistics -> {
-                findNavController().navigate(R.id.statisticFragment)
-            }
-
-            R.id.symptoms -> {
-                findNavController().navigate(R.id.symptomFragment)
-            }
-
-            R.id.preventation -> {
-                Toast.makeText(context, "Preventation !", Toast.LENGTH_SHORT).show()
-            }
-
-            R.id.article -> {
-                findNavController().navigate(R.id.articleFragment)
-            }
-
-            R.id.news -> {
-                findNavController().navigate(R.id.newsFragment)
-            }
-
-            R.id.help -> {
-                findNavController().navigate(R.id.helpFragment)
-            }
-        }
-        return true
-    }
 
     private fun loadData() {
         list.add(PrevModel(R.drawable.prev_mask, "Use mask", "Lorem ipsum dolor sit amet"))
