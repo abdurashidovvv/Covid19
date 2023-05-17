@@ -269,6 +269,7 @@
 
             <!--Statistic Section Start-->
             <androidx.cardview.widget.CardView
+                android:id="@+id/pieChart_card"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_margin="20dp"
@@ -290,5 +291,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

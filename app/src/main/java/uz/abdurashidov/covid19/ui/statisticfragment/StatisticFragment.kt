@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import uz.abdurashidov.covid19.R
 import uz.abdurashidov.covid19.databinding.FragmentStatisticBinding
+import uz.abdurashidov.covid19.models.covidmodels.ResponseCovidData
 import uz.abdurashidov.covid19.utils.Status
 import uz.abdurashidov.covid19.viewmodel.NetworkViewModel
 import kotlin.coroutines.CoroutineContext
@@ -29,7 +30,7 @@ class StatisticFragment : Fragment(), CoroutineScope {
         savedInstanceState: Bundle?,
     ): View {
 
-        val fragment = GlobalStatFragment()
+        val fragment = UzbStatFragment()
         replaceFragment(fragment)
 
         launch {

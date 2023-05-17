@@ -25,6 +25,7 @@ import uz.abdurashidov.covid19.models.covidnewsmodel.Article
 import uz.abdurashidov.covid19.network.NewsViewModel
 import uz.abdurashidov.covid19.ui.adapter.ArticleAdapter
 import uz.abdurashidov.covid19.ui.adapter.PreventationAdapter
+import uz.abdurashidov.covid19.utils.Constants
 import uz.abdurashidov.covid19.utils.Status
 import uz.abdurashidov.covid19.viewmodel.NetworkViewModel
 import kotlin.coroutines.CoroutineContext
