@@ -25,6 +25,10 @@ class MainFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         val fragment=HomeFragment()
         replaceFragment(fragment)
 
+        binding.menu.setOnClickListener {
+            binding.drawer.open()
+        }
+
         return binding.root
     }
 
