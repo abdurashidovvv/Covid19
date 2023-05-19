@@ -19,12 +19,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/my_tab"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                app:tabTextColor="@color/white"
+                android:scrollIndicators="bottom"
                 android:layout_marginHorizontal="20dp"
                 android:backgroundTint="#263238"
                 android:layout_marginBottom="20dp"
