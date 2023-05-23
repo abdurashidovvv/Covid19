@@ -58,16 +58,17 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     //activity-ktx [use: "by viewModels()"]
     implementation 'androidx.activity:activity-ktx:1.7.1'
-
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     //charts
     implementation 'com.androidplot:androidplot-core:1.5.7'
+
+    // Room
+    implementation "androidx.room:room-runtime:2.5.1"
+    annotationProcessor "androidx.room:room-compiler:2.5.1"
 }
 
 // Allow references to generated code
