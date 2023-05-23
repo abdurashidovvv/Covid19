@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import uz.abdurashidov.covid19.models.covidmodels.ResponseCovidData
+import uz.abdurashidov.covid19.models.covidnewsmodel.NewsResponse
 import uz.abdurashidov.covid19.repository.NetworkRepository
 import uz.abdurashidov.covid19.utils.Resource
 import uz.abdurashidov.covid19.utils.Status
@@ -35,4 +36,26 @@ class NetworkViewModel @Inject constructor(private val networkRepository: Networ
         }
         return stateFlow
     }
+
+    private val newsFlow =
+        MutableStateFlow<Resource<NewsResponse>>(Resource(Status.LOADING, null, "Loading"))
+
+    fun getAllNews(): MutableStateFlow<Resource<NewsResponse>> {
+
+        viewModelScope.launch {
+            newsFlow.value = Resource(Status.LOADING, null, "Loading")
+            networkRepository.getCovidNews().catch {
+                newsFlow.value = Resource(Status.ERROR, null, "Error")
+            }.collectLatest {
+                if (it.isSuccessful) {
+                    newsFlow.value = Resource(Status.SUCCESS, it.body(), "Success")
+                } else {
+                    newsFlow.value = Resource(Status.SUCCESS, null, "Error Response")
+                }
+            }
+        }
+
+        return newsFlow
+    }
+
 }
