@@ -11,4 +11,5 @@ class DatabaseRepository @Inject constructor(
 ){
     suspend fun getArticles() = newsDao.getAllArticles()
     suspend fun addArticle(article: Article) = newsDao.insertArticle(article)
+    suspend fun deleteArticle(article: Article) = newsDao.delete(article)
 }
