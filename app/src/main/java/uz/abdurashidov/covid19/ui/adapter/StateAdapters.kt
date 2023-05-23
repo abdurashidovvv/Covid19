@@ -3,8 +3,8 @@ package uz.abdurashidov.covid19.ui.adapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import uz.abdurashidov.covid19.models.ViewPagerItem
-import uz.abdurashidov.covid19.ui.SaveViewpagerItemFragment
-import uz.abdurashidov.covid19.ui.ViewPagerItemFragment
+import uz.abdurashidov.covid19.ui.news.SaveViewpagerItemFragment
+import uz.abdurashidov.covid19.ui.news.ViewPagerItemFragment
 
 class StateAdapters(val list:ArrayList<ViewPagerItem>, fragment: Fragment)
     : FragmentStateAdapter(fragment){
@@ -14,8 +14,8 @@ class StateAdapters(val list:ArrayList<ViewPagerItem>, fragment: Fragment)
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            1-> ViewPagerItemFragment()
-            2-> SaveViewpagerItemFragment()
+            0-> ViewPagerItemFragment()
+            1 -> SaveViewpagerItemFragment()
             else->ViewPagerItemFragment()
         }
     }

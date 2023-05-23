@@ -7,10 +7,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import uz.abdurashidov.covid19.R
 import uz.abdurashidov.covid19.databinding.FragmentMainBinding
+import uz.abdurashidov.covid19.ui.news.NewsFragment
 import uz.abdurashidov.covid19.ui.statisticfragment.StatisticFragment
 
 class MainFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
@@ -56,7 +56,7 @@ class MainFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 return true
             }
             R.id.news -> {
-                val fragment=NewsFragment()
+                val fragment= NewsFragment()
                 replaceFragment(fragment)
                 return true
             }

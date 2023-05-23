@@ -1,4 +1,4 @@
-package uz.abdurashidov.covid19.ui
+package uz.abdurashidov.covid19.ui.news
 
 import android.annotation.SuppressLint
 import android.os.Bundle

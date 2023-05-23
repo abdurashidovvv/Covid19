@@ -1,4 +1,4 @@
-package uz.abdurashidov.covid19.ui
+package uz.abdurashidov.covid19.ui.news
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
-import uz.abdurashidov.covid19.R
 import uz.abdurashidov.covid19.databinding.FragmentNewsBinding
 import uz.abdurashidov.covid19.models.ViewPagerItem
 import uz.abdurashidov.covid19.ui.adapter.StateAdapters
