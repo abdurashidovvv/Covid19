@@ -5,13 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +21,6 @@ import uz.abdurashidov.covid19.models.covidnewsmodel.Article
 import uz.abdurashidov.covid19.network.NewsViewModel
 import uz.abdurashidov.covid19.ui.adapter.ArticleAdapter
 import uz.abdurashidov.covid19.ui.adapter.PreventationAdapter
-import uz.abdurashidov.covid19.utils.Constants
 import uz.abdurashidov.covid19.utils.Status
 import uz.abdurashidov.covid19.viewmodel.NetworkViewModel
 import kotlin.coroutines.CoroutineContext

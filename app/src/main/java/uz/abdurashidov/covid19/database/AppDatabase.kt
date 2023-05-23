@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import uz.abdurashidov.covid19.database.dao.NewsDao
 import uz.abdurashidov.covid19.database.entity.Article
 
-@Database(entities = [Article::class], version = 1)
+@Database(entities = [Article::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun newsDao(): NewsDao
