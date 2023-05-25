@@ -2,6 +2,7 @@ package uz.abdurashidov.covid19.ui.news
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import uz.abdurashidov.covid19.database.entity.Article
 import uz.abdurashidov.covid19.databinding.FragmentSaveViewpagerItemBinding
+import uz.abdurashidov.covid19.models.covidnewsmodel.Article
+import uz.abdurashidov.covid19.models.covidnewsmodel.Source
 import uz.abdurashidov.covid19.ui.adapter.ArticleAdapter
 import uz.abdurashidov.covid19.viewmodel.DatabaseViewModel
 import kotlin.coroutines.CoroutineContext
@@ -34,16 +36,37 @@ class SaveViewpagerItemFragment : Fragment(), CoroutineScope {
         savedInstanceState: Bundle?,
     ): View {
         list = ArrayList()
+
         articleAdapter =
-            ArticleAdapter(list as ArrayList<uz.abdurashidov.covid19.models.covidnewsmodel.Article>)
+            ArticleAdapter(list,object : ArticleAdapter.RvItemClick{
+                override fun onClick(article: Article) {
+                    TODO("Not yet implemented")
+                }
+            })
         binding.myRv.adapter = articleAdapter
         launch(Dispatchers.Main) {
             databaseViewModel.getAllUsers().collectLatest {
-                list.addAll(it.data ?: emptyList())
+                if (it.data!=null){
+                    it.data.forEach { article->
+                        list.add(
+                            Article(
+                                author = article.author,
+                                content = article.content,
+                                description = article.description,
+                                publishedAt = article.publishedAt,
+                                source = Source(id = "1", name = "name"),
+                                title = article.title,
+                                url = article.url,
+                                urlToImage = article.urlToImage
+                            )
+                        )
+                    }
+                }
+                list.addAll(list)
+                Log.d("@saveViewpagerFragment", "onCreateView: $list")
                 articleAdapter.notifyDataSetChanged()
             }
         }
-
         return binding.root
     }
 

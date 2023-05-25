@@ -8,7 +8,7 @@ import uz.abdurashidov.covid19.databinding.NewsRvItemBinding
 import uz.abdurashidov.covid19.databinding.PrevRvItemBinding
 import uz.abdurashidov.covid19.models.covidnewsmodel.Article
 
-class ArticleAdapter(var list: ArrayList<Article>) : RecyclerView.Adapter<ArticleAdapter.Vh>() {
+class ArticleAdapter(var list: ArrayList<Article>, val rvItemClick: RvItemClick) : RecyclerView.Adapter<ArticleAdapter.Vh>() {
 
     inner class Vh(val prevRvItemBinding: NewsRvItemBinding) :
         RecyclerView.ViewHolder(prevRvItemBinding.root) {
@@ -16,6 +16,11 @@ class ArticleAdapter(var list: ArrayList<Article>) : RecyclerView.Adapter<Articl
             Picasso.get().load(article.urlToImage).into(prevRvItemBinding.image)
             prevRvItemBinding.title.text = article.title
             prevRvItemBinding.info.text = article.description.subSequence(0, 30).toString()
+
+            prevRvItemBinding.root.setOnLongClickListener {
+                rvItemClick.onClick(article)
+                true
+            }
         }
     }
 
@@ -27,5 +32,9 @@ class ArticleAdapter(var list: ArrayList<Article>) : RecyclerView.Adapter<Articl
 
     override fun onBindViewHolder(holder: Vh, position: Int) {
         holder.onBind(list[position])
+    }
+
+    interface RvItemClick{
+        fun onClick(article: Article)
     }
 }

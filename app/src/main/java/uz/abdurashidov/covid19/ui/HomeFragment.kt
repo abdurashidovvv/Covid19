@@ -104,7 +104,11 @@ class HomeFragment : Fragment(), CoroutineScope {
         preventationAdapter = PreventationAdapter(list)
         binding.preventionRv.adapter = preventationAdapter
 
-        articleAdapter = ArticleAdapter(articleList)
+        articleAdapter = ArticleAdapter(articleList, object : ArticleAdapter.RvItemClick{
+            override fun onClick(article: Article) {
+                TODO("Not yet implemented")
+            }
+        })
         binding.newsRv.adapter = articleAdapter
 
         binding.articleRv.adapter = articleAdapter
